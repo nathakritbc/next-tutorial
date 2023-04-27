@@ -1,6 +1,6 @@
 import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 
-const timeMaxAge = 60 * 6 * 24;
+const timeMaxAge = 3600 * 24;
 
 // cookie client-side function
 
