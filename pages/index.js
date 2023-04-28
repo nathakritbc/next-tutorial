@@ -1,8 +1,12 @@
 import { cookieServerSide, cookieClientSide } from "../utils/nextCookie";
 
 const Home = () => {
-  const user = cookieClientSide.getCookieFuncClientSide("user");
-  console.log("user", user);
+  cookieClientSide.setCookieFuncClientSide("user", {
+    id: 1,
+    name: "nathakrit",
+  });
+  // const user = cookieClientSide.getCookieFuncClientSide("user");
+  // console.log("user", user);
   return <div>page content </div>;
 };
 
