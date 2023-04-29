@@ -9,8 +9,10 @@ export default function handler(req, res) {
   //   res
   // );
   const user = cookieServerSide.getCookieFuncServerSide("user", req, res);
-
+  // const allData = cookieServerSide.getAllCookiesFuncServerSide(req, res);
   console.log("user", user);
+
+  // console.log("allData", allData);
 
   if (user) {
     res.status(200).json({ name: "John Doe", user: JSON.parse(user) });

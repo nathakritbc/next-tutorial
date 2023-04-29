@@ -1,23 +1,38 @@
 import { cookieServerSide, cookieClientSide } from "../utils/nextCookie";
+import { useRouter } from "next/router";
+import React, { useState, useEffect } from "react";
+const Home = ({ user }) => {
+  const router = useRouter();
 
-const Home = () => {
-  cookieClientSide.setCookieFuncClientSide("user", {
-    id: 1,
-    name: "nathakrit",
-  });
-  // const user = cookieClientSide.getCookieFuncClientSide("user");
-  // console.log("user", user);
-  return <div>page content </div>;
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, []);
+
+  return (
+    <div>
+      <h1>Your Profile</h1>
+      <pre>user : {user}</pre>
+    </div>
+  );
 };
 
 export const getServerSideProps = ({ req, res }) => {
-  // const user = cookieServerSide.getCookieFuncServerSide("user", req, res);
+  const user = cookieServerSide.getCookieFuncServerSide("user", req, res);
 
-  // console.log("user", user);
-  // getCookies({ req, res });
-  // deleteCookie("user", { req, res });
+  if (!user) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
-  return { props: {} };
+  return {
+    props: { user },
+  };
 };
 
 export default Home;
